@@ -3,10 +3,10 @@
   "id": "imblocker",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "IMBlockerFabric",
+  "description": "A Easy Mod Copy of IMBlocker,but this one is base on Fabric API!",
   "authors": [
-    "Me!"
+    "Jesen"
   ],
   "contact": {
     "homepage": "http://mc.ddwhm.com/",
