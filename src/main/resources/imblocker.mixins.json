@@ -10,7 +10,10 @@
     "ChatMixin",
     "BookEditMixin",
     "SignEditMixin",
-    "ScreenMixin"
+    "ScreenMixin",
+    "CreativeInvMixin",
+    "InventoryMixin",
+    "AbsButtonMixin"
   ],
   "injectors": {
     "defaultRequire": 1

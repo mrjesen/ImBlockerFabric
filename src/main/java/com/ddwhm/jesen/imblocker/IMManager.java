@@ -4,8 +4,19 @@ import com.sun.jna.Native;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
+import jdk.nashorn.internal.ir.Flags;
 
 public class IMManager {
+    public static int flag = 0;
+    /*
+        0 初始化
+        200 WINDOWS
+        500 NOT WINDOWS
+        2000 Off
+        2001 On
+
+    */
+
 
     private static native WinNT.HANDLE ImmGetContext(WinDef.HWND hwnd);
 
@@ -22,40 +33,13 @@ public class IMManager {
     }
 
     private static User32 u = User32.INSTANCE;
-    //
-    // public static void activateIME() {
-    // WinDef.HWND hwnd = u.GetForegroundWindow();
-    // IMBlocker.LOGGER.info(u.GetWindowTextLength(hwnd));
-    // IMBlocker.LOGGER.info(hwnd);
-    // WinNT.HANDLE himc = ImmGetContext(hwnd);
-    // IMBlocker.LOGGER.info(himc);
-    // if (himc != null) {
-    // ImmDestroyContext(himc);
-    // }
-    // himc = ImmCreateContext();
-    // IMBlocker.LOGGER.info(himc);
-    // ImmAssociateContext(hwnd, himc);
-    // ImmReleaseContext(hwnd, himc);
-    // }
-    //
-    // public static void deactivateIME() {
-    // WinDef.HWND hwnd = u.GetForegroundWindow();
-    // IMBlocker.LOGGER.info(hwnd);
-    // WinNT.HANDLE himc = ImmGetContext(hwnd); //useless?
-    // IMBlocker.LOGGER.info(himc);
-    // ImmAssociateContext(hwnd, null);
-    // }
-    //
-    // public static boolean checkIMEState() {
-    // WinDef.HWND hwnd = u.GetForegroundWindow();
-    // WinNT.HANDLE himc = ImmGetContext(hwnd); //need release?
-    // return himc == null;
-    // }
+
 
     public static void makeOn() {
-        // if (!checkIMEState()) {
-        // activateIME();
-        // }
+        if(IMManager.flag == 2001 || IMManager.flag == 500){
+            return;
+        }
+        IMManager.flag = 2001;
         WinDef.HWND hwnd = u.GetForegroundWindow();
         WinNT.HANDLE himc = ImmGetContext(hwnd);
         if (himc == null) {
@@ -66,6 +50,10 @@ public class IMManager {
     }
 
     public static void makeOff() {
+        if(IMManager.flag == 2000 || IMManager.flag == 500){
+            return;
+        }
+        IMManager.flag = 2000;
         WinDef.HWND hwnd = u.GetForegroundWindow();
         WinNT.HANDLE himc = ImmAssociateContext(hwnd, null);
         if (himc != null) {
@@ -87,3 +75,4 @@ public class IMManager {
         return false;
     }
 }
+
