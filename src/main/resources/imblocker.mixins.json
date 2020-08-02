@@ -13,7 +13,9 @@
     "ScreenMixin",
     "CreativeInvMixin",
     "InventoryMixin",
-    "AbsButtonMixin"
+    "AbsButtonMixin",
+    "DrawTextMixin",
+    "AnvilScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
