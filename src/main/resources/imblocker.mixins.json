@@ -16,6 +16,7 @@
     "AbsButtonMixin",
     "AnvilScreenMixin"
   ],
+  "plugin": "com.ddwhm.jesen.imblocker.MixinManager",
   "injectors": {
     "defaultRequire": 1
   }

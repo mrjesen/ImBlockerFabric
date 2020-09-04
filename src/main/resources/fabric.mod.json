@@ -16,7 +16,7 @@
   "license": "CC0-1.0",
   "icon": "assets/imblocker/icon.png",
 
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
     "main": [
       "com.ddwhm.jesen.imblocker.ImBlocker"
