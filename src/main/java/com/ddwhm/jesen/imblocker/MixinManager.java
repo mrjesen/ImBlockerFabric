@@ -24,10 +24,10 @@ public class MixinManager implements IMixinConfigPlugin {
         if (!(System.getProperty("os.name").toLowerCase().startsWith("win"))) {
             return false;
         }
-        if (mixinClassName.endsWith("mixin.AbsButtonMixin") && (SharedConstants.getGameVersion().getName().startsWith("1.15") || SharedConstants.getGameVersion().getName().startsWith("1.14"))) {
+        if (mixinClassName.endsWith("mixin.AbsButtonMixin") && SharedConstants.getGameVersion().getProtocolVersion() < 705) {
             return false;
         }
-        if (mixinClassName.endsWith("mixin.AnvilScreenMixin") && (SharedConstants.getGameVersion().getName().startsWith("1.15") || SharedConstants.getGameVersion().getName().startsWith("1.14"))) {
+        if (mixinClassName.endsWith("mixin.AnvilScreenMixin") && SharedConstants.getGameVersion().getProtocolVersion() < 705) {
             return false;
         }
         return true;
