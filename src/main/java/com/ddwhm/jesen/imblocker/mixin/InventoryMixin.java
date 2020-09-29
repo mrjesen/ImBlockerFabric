@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(InventoryScreen.class)
 public class InventoryMixin {
     @Inject(at = @At("RETURN"), method = "<init>*")
-    private void InventoryScreenMixin(CallbackInfo info) {
+    private void inventoryScreenMixin(CallbackInfo info) {
         //生存模式物品栏
         System.out.println("survival off");
         IMManager.makeOff();

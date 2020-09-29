@@ -21,13 +21,13 @@ public class MixinManager implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if(!(System.getProperty("os.name").toLowerCase().startsWith("win"))){
+        if (!(System.getProperty("os.name").toLowerCase().startsWith("win"))) {
             return false;
         }
-        if(mixinClassName.endsWith("mixin.AbsButtonMixin") && (SharedConstants.getGameVersion().getName().startsWith("1.15") || SharedConstants.getGameVersion().getName().startsWith("1.14") )){
+        if (mixinClassName.endsWith("mixin.AbsButtonMixin") && (SharedConstants.getGameVersion().getName().startsWith("1.15") || SharedConstants.getGameVersion().getName().startsWith("1.14"))) {
             return false;
         }
-        if(mixinClassName.endsWith("mixin.AnvilScreenMixin") && (SharedConstants.getGameVersion().getName().startsWith("1.15") || SharedConstants.getGameVersion().getName().startsWith("1.14") )){
+        if (mixinClassName.endsWith("mixin.AnvilScreenMixin") && (SharedConstants.getGameVersion().getName().startsWith("1.15") || SharedConstants.getGameVersion().getName().startsWith("1.14"))) {
             return false;
         }
         return true;

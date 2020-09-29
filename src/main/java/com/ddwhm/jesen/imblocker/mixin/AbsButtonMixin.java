@@ -11,22 +11,22 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(AbstractButtonWidget.class)
 public class AbsButtonMixin {
     @Inject(at = @At("RETURN"), method = "setFocused")
-	private void setFocusedMixin(boolean selected, CallbackInfo info) {
-		if(selected){
-			IMManager.makeOn();
-		}else{
-			IMManager.makeOff();
-		}
-	}
+    private void setFocusedMixin(boolean selected, CallbackInfo info) {
+        if (selected) {
+            IMManager.makeOn();
+        } else {
+            IMManager.makeOff();
+        }
+    }
 
-	@Inject(at = @At("RETURN"), method = "isFocused")
-	private void onisFocused(CallbackInfoReturnable<Boolean> cir) {
-		if(cir.getReturnValue()){
-			IMManager.makeOn();
-		}else{
-			IMManager.makeOff();
-		}
+    @Inject(at = @At("RETURN"), method = "isFocused")
+    private void onIsFocused(CallbackInfoReturnable<Boolean> cir) {
+        if (cir.getReturnValue()) {
+            IMManager.makeOn();
+        } else {
+            IMManager.makeOff();
+        }
 
 
-	}
+    }
 }
