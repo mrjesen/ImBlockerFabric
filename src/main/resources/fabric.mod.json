@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "imblocker",
   "version": "${version}",
-
   "name": "IMBlockerFabric",
   "description": "IMBlockerFabric is a mod that It can Hide IM(InputMethod) when you don't need to input text! This mod fixes the typing bug exist in Minecraft which annoying Asian players for a long time. You can now type multi-byte characters in game using Input Methods (tested in windows platform, with chinese and japanese)",
   "authors": [
@@ -12,24 +11,19 @@
     "homepage": "http://mc.ddwhm.com/",
     "sources": "http://mc.ddwhm.com/#"
   },
-
   "license": "CC0-1.0",
   "icon": "assets/imblocker/icon.png",
-
   "environment": "client",
   "entrypoints": {
-    "main": [
+    "client": [
       "com.ddwhm.jesen.imblocker.ImBlocker"
     ]
   },
   "mixins": [
     "imblocker.mixins.json"
   ],
-
   "depends": {
-    "fabricloader": ">=0.7.4",
-    "fabric": "*",
-    "minecraft": ">=1.14.4"
+    "fabricloader": ">=0.7.4"
   },
   "suggests": {
     "flamingo": "*"

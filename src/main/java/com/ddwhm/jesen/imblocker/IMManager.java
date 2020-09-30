@@ -4,7 +4,6 @@ import com.sun.jna.Native;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
-import jdk.nashorn.internal.ir.Flags;
 
 public class IMManager {
     public static int flag = 0;
@@ -36,7 +35,7 @@ public class IMManager {
 
 
     public static void makeOn() {
-        if(IMManager.flag == 2001 || IMManager.flag == 500){
+        if (IMManager.flag == 2001 || IMManager.flag == 500) {
             return;
         }
         IMManager.flag = 2001;
@@ -50,7 +49,7 @@ public class IMManager {
     }
 
     public static void makeOff() {
-        if(IMManager.flag == 2000 || IMManager.flag == 500){
+        if (IMManager.flag == 2000 || IMManager.flag == 500) {
             return;
         }
         System.out.println("Stop IM");

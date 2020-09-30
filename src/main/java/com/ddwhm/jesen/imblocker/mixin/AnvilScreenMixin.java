@@ -18,12 +18,12 @@ public class AnvilScreenMixin {
     }
 
     @Inject(at = @At("RETURN"), method = "onSlotUpdate")
-    private void onSlotUpdateMixin(ScreenHandler handler, int slotId, ItemStack stack,CallbackInfo info) {
-        if(slotId == 0 && stack.isEmpty()){
+    private void onSlotUpdateMixin(ScreenHandler handler, int slotId, ItemStack stack, CallbackInfo info) {
+        if (slotId == 0 && stack.isEmpty()) {
             IMManager.makeOff();
             //System.out.println("Anvil onStart Off");
         }
-        if(slotId == 0 && !stack.isEmpty()){
+        if (slotId == 0 && !stack.isEmpty()) {
             IMManager.makeOn();
             //System.out.println("Anvil notEmpty On");
         }
