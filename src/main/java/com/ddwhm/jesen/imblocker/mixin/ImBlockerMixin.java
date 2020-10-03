@@ -1,6 +1,6 @@
 package com.ddwhm.jesen.imblocker.mixin;
 
-import com.ddwhm.jesen.imblocker.IMManager;
+import com.ddwhm.jesen.imblocker.ImManager;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -11,8 +11,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ImBlockerMixin {
     @Inject(at = @At("RETURN"), method = "<init>*")
     private void onConstructed(CallbackInfo info) {
-        IMManager.makeOn();
-//		System.out.println("Opened IM!");
+        ImManager.makeOn();
+        // System.out.println("Opened IM!");
     }
 
 

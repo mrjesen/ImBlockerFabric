@@ -1,6 +1,6 @@
 package com.ddwhm.jesen.imblocker;
 
-import net.minecraft.SharedConstants;
+import net.minecraft.MinecraftVersion;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -21,14 +21,16 @@ public class MixinManager implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        int protocolVersion = MinecraftVersion.create().getProtocolVersion();
         if (!(System.getProperty("os.name").toLowerCase().startsWith("win"))) {
             return false;
         }
-        if (mixinClassName.endsWith("mixin.AbsButtonMixin") && SharedConstants.getGameVersion().getProtocolVersion() < 705) {
+        if (mixinClassName.endsWith("mixin.AbsButtonMixin") && protocolVersion < 705) {
             return false;
         }
-        if (mixinClassName.endsWith("mixin.AnvilScreenMixin") && SharedConstants.getGameVersion().getProtocolVersion() < 705) {
+        if (mixinClassName.endsWith("mixin.AnvilScreenMixin") && protocolVersion < 705) {
             return false;
+
         }
         return true;
     }

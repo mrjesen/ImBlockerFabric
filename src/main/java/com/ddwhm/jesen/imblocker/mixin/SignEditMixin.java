@@ -1,6 +1,6 @@
 package com.ddwhm.jesen.imblocker.mixin;
 
-import com.ddwhm.jesen.imblocker.IMManager;
+import com.ddwhm.jesen.imblocker.ImManager;
 import net.minecraft.client.gui.screen.ingame.SignEditScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,12 +12,12 @@ public class SignEditMixin {
 
     @Inject(at = @At("RETURN"), method = "<init>*")
     private void onConstructed(CallbackInfo info) {
-        IMManager.makeOn();
-//        System.out.println("Opened IM!");
+        ImManager.makeOn();
+        // System.out.println("Opened IM!");
     }
 
     @Inject(at = @At("RETURN"), method = "finishEditing")
     private void onFinishEditing(CallbackInfo info) {
-        IMManager.makeOff();
+        ImManager.makeOff();
     }
 }

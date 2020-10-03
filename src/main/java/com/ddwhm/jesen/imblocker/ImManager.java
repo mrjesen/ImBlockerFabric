@@ -5,7 +5,7 @@ import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
 
-public class IMManager {
+public class ImManager {
     public static int flag = 0;
     /*
         0 初始化
@@ -35,10 +35,10 @@ public class IMManager {
 
 
     public static void makeOn() {
-        if (IMManager.flag == 2001 || IMManager.flag == 500) {
+        if (ImManager.flag == 2001 || ImManager.flag == 500) {
             return;
         }
-        IMManager.flag = 2001;
+        ImManager.flag = 2001;
         WinDef.HWND hwnd = u.GetForegroundWindow();
         WinNT.HANDLE himc = ImmGetContext(hwnd);
         if (himc == null) {
@@ -49,11 +49,10 @@ public class IMManager {
     }
 
     public static void makeOff() {
-        if (IMManager.flag == 2000 || IMManager.flag == 500) {
+        if (ImManager.flag == 2000 || ImManager.flag == 500) {
             return;
         }
-        System.out.println("Stop IM");
-        IMManager.flag = 2000;
+        ImManager.flag = 2000;
         WinDef.HWND hwnd = u.GetForegroundWindow();
         WinNT.HANDLE himc = ImmAssociateContext(hwnd, null);
         if (himc != null) {

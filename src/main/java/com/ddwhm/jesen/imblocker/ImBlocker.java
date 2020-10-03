@@ -8,12 +8,11 @@ public class ImBlocker implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        // System.out.println("1");
         String os = System.getProperty("os.name");
         if (os.toLowerCase().startsWith("win")) {
-            IMManager.flag = 200;
+            ImManager.flag = 200;
         } else {
-            IMManager.flag = 500;
+            ImManager.flag = 500;
         }
     }
 
