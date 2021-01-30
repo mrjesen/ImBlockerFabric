@@ -2,6 +2,7 @@ package com.ddwhm.jesen.imblocker;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import net.fabricmc.loader.api.FabricLoader;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -14,6 +15,10 @@ import java.util.List;
 import java.util.Set;
 
 public class MixinManager implements IMixinConfigPlugin {
+    public static boolean isRoughlyEnoughItemsApiLoaded = false;
+    private static final String ROUGHLY_ENOUGH_ITEMS_API_MOD_ID = "roughlyenoughitems-api";
+    private static final String MIXIN_ROUGHLY_ENOUGH_ITEMS_API = "com.ddwhm.jesen.imblocker.mixin.rei";
+
     // rewrite the getversion function to fix the issue #12
     private static int getGameVersion() {
         try (
@@ -30,7 +35,7 @@ public class MixinManager implements IMixinConfigPlugin {
 
     @Override
     public void onLoad(String mixinPackage) {
-
+        isRoughlyEnoughItemsApiLoaded = FabricLoader.getInstance().isModLoaded(ROUGHLY_ENOUGH_ITEMS_API_MOD_ID);
     }
 
     @Override
@@ -44,9 +49,13 @@ public class MixinManager implements IMixinConfigPlugin {
         if (!(System.getProperty("os.name").toLowerCase().startsWith("win"))) {
             return false;
         }
-        if (mixinClassName.endsWith("mixin.AbsButtonMixin") && protocolVersion < 705)
+        if (mixinClassName.endsWith("mixin.MixinAbstractButtonWidget") && protocolVersion < 705) {
             return false;
-        return !mixinClassName.endsWith("mixin.AnvilScreenMixin") || protocolVersion >= 705;
+        }
+        if (!isRoughlyEnoughItemsApiLoaded && mixinClassName.startsWith(MIXIN_ROUGHLY_ENOUGH_ITEMS_API)) {
+            return false;
+        }
+        return !mixinClassName.endsWith("mixin.MixinAnvilScreen") || protocolVersion >= 705;
     }
 
     @Override

@@ -3,21 +3,21 @@
   "minVersion": "0.8",
   "package": "com.ddwhm.jesen.imblocker.mixin",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [
-  ],
   "client": [
-    "ImBlockerMixin",
-    "ChatMixin",
-    "BookEditMixin",
-    "SignEditMixin",
-    "ScreenMixin",
-    "CreativeInvMixin",
-    "InventoryMixin",
-    "AbsButtonMixin",
-    "AnvilScreenMixin"
+    "MixinAbstractButtonWidget",
+    "MixinAnvilScreen",
+    "MixinBookEditScreen",
+    "MixinChatScreen",
+    "MixinCreativeInventoryScreen",
+    "MixinInventoryScreen",
+    "MixinMinecraftClient",
+    "MixinSignEditScreen"
   ],
   "plugin": "com.ddwhm.jesen.imblocker.MixinManager",
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "mixins": [
+    "rei.MixinTextFieldWidget"
+  ]
 }
