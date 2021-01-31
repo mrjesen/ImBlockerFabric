@@ -1,5 +1,6 @@
 package com.ddwhm.jesen.imblocker.mixin;
 
+import com.ddwhm.jesen.imblocker.ImBlocker;
 import com.ddwhm.jesen.imblocker.ImManager;
 import net.minecraft.client.gui.screen.ingame.AnvilScreen;
 import net.minecraft.item.ItemStack;
@@ -10,23 +11,24 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(AnvilScreen.class)
-public class AnvilScreenMixin {
+public class MixinAnvilScreen {
     @Inject(at = @At("RETURN"), method = "setup")
-    private void onSetup(CallbackInfo info) {
+    private void postSetup(CallbackInfo info) {
+        // fix #4
+        ImBlocker.LOGGER.debug("AnvilScreen.setup");
         ImManager.makeOff();
-        // System.out.println("Anvil Setup Off");
     }
 
     @Inject(at = @At("RETURN"), method = "onSlotUpdate")
-    private void onSlotUpdateMixin(ScreenHandler handler, int slotId, ItemStack stack, CallbackInfo info) {
-        if (slotId == 0 && stack.isEmpty()) {
+    private void postOnSlotUpdate(ScreenHandler handler, int slotId, ItemStack stack, CallbackInfo info) {
+        if (slotId != 0) {
+            return;
+        }
+        ImBlocker.LOGGER.debug("AnvilScreen.onSlotUpdate");
+        if (stack.isEmpty()) {
             ImManager.makeOff();
-            // System.out.println("Anvil onStart Off");
-        }
-        if (slotId == 0 && !stack.isEmpty()) {
+        } else {
             ImManager.makeOn();
-            // System.out.println("Anvil notEmpty On");
         }
-
     }
 }

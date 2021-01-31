@@ -6,16 +6,17 @@ import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
 
 public class ImManager {
-    public static int flag = 0;
-    /*
-        0 初始化
-        200 WINDOWS
-        500 NOT WINDOWS
-        2000 Off
-        2001 On
+    public enum Status {
+        INIT, ON, OFF
+    }
 
-    */
+    public static Status status = Status.INIT;
 
+    public enum OS {
+        WINDOWS, OTHERS
+    }
+
+    public static OS os = OS.OTHERS;
 
     private static native WinNT.HANDLE ImmGetContext(WinDef.HWND hwnd);
 
@@ -31,14 +32,15 @@ public class ImManager {
         Native.register("imm32");
     }
 
-    private static User32 u = User32.INSTANCE;
+    private static final User32 u = User32.INSTANCE;
 
 
     public static void makeOn() {
-        if (ImManager.flag == 2001 || ImManager.flag == 500) {
+        ImBlocker.LOGGER.debug("status:{} makeOn", ImManager.status);
+        if (ImManager.os != OS.WINDOWS || ImManager.status == Status.ON) {
             return;
         }
-        ImManager.flag = 2001;
+        ImManager.status = Status.ON;
         WinDef.HWND hwnd = u.GetForegroundWindow();
         WinNT.HANDLE himc = ImmGetContext(hwnd);
         if (himc == null) {
@@ -49,10 +51,11 @@ public class ImManager {
     }
 
     public static void makeOff() {
-        if (ImManager.flag == 2000 || ImManager.flag == 500) {
+        ImBlocker.LOGGER.debug("status:{} makeOff", ImManager.status);
+        if (ImManager.os != OS.WINDOWS || ImManager.status == Status.OFF) {
             return;
         }
-        ImManager.flag = 2000;
+        ImManager.status = Status.OFF;
         WinDef.HWND hwnd = u.GetForegroundWindow();
         WinNT.HANDLE himc = ImmAssociateContext(hwnd, null);
         if (himc != null) {
