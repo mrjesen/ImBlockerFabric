@@ -11,13 +11,13 @@
     "MixinCreativeInventoryScreen",
     "MixinInventoryScreen",
     "MixinMinecraftClient",
-    "MixinSignEditScreen"
+    "MixinSignEditScreen",
+    "rei.MixinTextFieldWidget"
   ],
   "plugin": "com.ddwhm.jesen.imblocker.MixinManager",
   "injectors": {
     "defaultRequire": 1
   },
   "mixins": [
-    "rei.MixinTextFieldWidget"
   ]
 }
