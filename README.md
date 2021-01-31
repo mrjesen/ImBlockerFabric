@@ -7,4 +7,4 @@ This mod fixes the typing bug exist in Minecraft which annoying Asian players fo
 You can now type multi-byte characters in game using Input Methods (tested in windows platform, with chinese and japanese)
 
 
-### Support 1.14.4-1.16.1 and require FabricAPI
+### Support >=1.14.4 and require FabricAPI
