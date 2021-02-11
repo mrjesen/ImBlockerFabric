@@ -13,7 +13,7 @@ public class ImBlocker implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        //Configurator.setLevel(LOGGER.getName(), Level.toLevel("DEBUG"));
+        // Configurator.setLevel(LOGGER.getName(), Level.toLevel("DEBUG"));
         String os = System.getProperty("os.name");
         if (os.toLowerCase().startsWith("win")) {
             ImManager.os = ImManager.OS.WINDOWS;
