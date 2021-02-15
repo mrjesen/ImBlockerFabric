@@ -5,11 +5,14 @@
   "compatibilityLevel": "JAVA_8",
   "client": [
     "MixinAbstractButtonWidget",
+    "MixinAnvilScreen",
     "MixinBookEditScreen",
+    "MixinChatScreen",
+    "MixinCreativeInventoryScreen",
+    "MixinInventoryScreen",
     "MixinMinecraftClient",
     "MixinSignEditScreen",
-    "rei.MixinTextFieldWidget",
-    "MixinTextFieldWidget"
+    "rei.MixinTextFieldWidget"
   ],
   "plugin": "com.ddwhm.jesen.imblocker.MixinManager",
   "injectors": {
