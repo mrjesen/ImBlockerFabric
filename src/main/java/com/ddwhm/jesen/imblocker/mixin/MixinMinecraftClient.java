@@ -2,6 +2,7 @@ package com.ddwhm.jesen.imblocker.mixin;
 
 import com.ddwhm.jesen.imblocker.ImBlocker;
 import com.ddwhm.jesen.imblocker.ImManager;
+import com.ddwhm.jesen.imblocker.util.WidgetManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.WindowEventHandler;
 import net.minecraft.client.gui.screen.Screen;
@@ -19,12 +20,18 @@ public abstract class MixinMinecraftClient extends ReentrantThreadExecutor<Runna
         super(string);
     }
 
-    @Inject(at = @At("HEAD"), method = "openScreen")
+    @Inject(method = "openScreen", at = @At("HEAD"))
     private void preOpenScreen(Screen screen, CallbackInfo info) {
         if (screen == null) {
             // 关闭 GUI 时关闭输入法
             ImBlocker.LOGGER.debug("MixinMinecraftClient.openScreen");
-            ImManager.makeOff();
+            WidgetManager.clear();
         }
+    }
+
+    @Inject(method = "tick", at = @At("HEAD"))
+    private void preTick(CallbackInfo ci) {
+        // 每 tick + 1，超过 1s 没动作的 widget 则移除
+        WidgetManager.tick();
     }
 }
