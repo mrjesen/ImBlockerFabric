@@ -1,6 +1,6 @@
 package com.ddwhm.jesen.imblocker.util;
 
-import com.ddwhm.jesen.imblocker.ImManager;
+import com.ddwhm.jesen.imblocker.ImBlocker;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -47,9 +47,9 @@ public class WidgetManager {
             on |= v;
         }
         if (on) {
-            ImManager.makeOn();
+            ImBlocker.imManager.makeOn();
         } else {
-            ImManager.makeOff();
+            ImBlocker.imManager.makeOff();
         }
     }
 
@@ -58,6 +58,6 @@ public class WidgetManager {
         widgetLifeTime.clear();
         widgetStatus.clear();
         lock.unlock();
-        ImManager.makeOff();
+        ImBlocker.imManager.makeOff();
     }
 }

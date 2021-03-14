@@ -8,13 +8,12 @@
     "MixinBookEditScreen",
     "MixinMinecraftClient",
     "MixinSignEditScreen",
+    "MixinTextFieldWidget",
     "rei.MixinTextFieldWidget",
-    "MixinTextFieldWidget"
+    "MixinChatScreen"
   ],
   "plugin": "com.ddwhm.jesen.imblocker.MixinManager",
   "injectors": {
     "defaultRequire": 1
-  },
-  "mixins": [
-  ]
+  }
 }

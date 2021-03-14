@@ -1,5 +1,7 @@
-package com.ddwhm.jesen.imblocker;
+package com.ddwhm.jesen.imblocker.immanager.windows;
 
+import com.ddwhm.jesen.imblocker.ImBlocker;
+import com.ddwhm.jesen.imblocker.immanager.ImManager;
 import com.sun.jna.Native;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;

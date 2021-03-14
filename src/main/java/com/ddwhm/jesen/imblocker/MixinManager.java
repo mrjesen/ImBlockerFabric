@@ -18,6 +18,7 @@ public class MixinManager implements IMixinConfigPlugin {
     public static boolean isRoughlyEnoughItemsApiLoaded = false;
     private static final String ROUGHLY_ENOUGH_ITEMS_API_MOD_ID = "roughlyenoughitems-api";
     private static final String MIXIN_ROUGHLY_ENOUGH_ITEMS_API = "com.ddwhm.jesen.imblocker.mixin.rei";
+    public static int protocolVersion;
 
     // rewrite the getversion function to fix the issue #12
     private static int getGameVersion() {
@@ -36,6 +37,7 @@ public class MixinManager implements IMixinConfigPlugin {
     @Override
     public void onLoad(String mixinPackage) {
         isRoughlyEnoughItemsApiLoaded = FabricLoader.getInstance().isModLoaded(ROUGHLY_ENOUGH_ITEMS_API_MOD_ID);
+        protocolVersion = getGameVersion();
     }
 
     @Override
@@ -45,10 +47,6 @@ public class MixinManager implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        int protocolVersion = getGameVersion();
-        if (!(System.getProperty("os.name").toLowerCase().startsWith("win"))) {
-            return false;
-        }
         if (mixinClassName.endsWith("mixin.MixinAbstractButtonWidget") && protocolVersion < 705) {
             return false;
         }

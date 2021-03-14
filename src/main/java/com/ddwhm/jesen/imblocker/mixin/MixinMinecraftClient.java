@@ -1,7 +1,6 @@
 package com.ddwhm.jesen.imblocker.mixin;
 
 import com.ddwhm.jesen.imblocker.ImBlocker;
-import com.ddwhm.jesen.imblocker.ImManager;
 import com.ddwhm.jesen.imblocker.util.WidgetManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.WindowEventHandler;
