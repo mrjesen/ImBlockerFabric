@@ -1,6 +1,7 @@
 package com.ddwhm.jesen.imblocker.mixin;
 
 import com.ddwhm.jesen.imblocker.ImBlocker;
+import com.ddwhm.jesen.imblocker.util.CompatAbstractButtonWidget;
 import com.ddwhm.jesen.imblocker.util.TextFieldWidgetInvoker;
 import com.ddwhm.jesen.imblocker.util.WidgetManager;
 import net.minecraft.client.gui.Drawable;
@@ -32,6 +33,10 @@ public abstract class MixinTextFieldWidget extends AbstractButtonWidget implemen
     @Override
     public void updateWidgetStatus() {
         // 铁砧之类会设置 editable
-        WidgetManager.updateWidgetStatus(this, this.editable && this.isFocused());
+        if (this instanceof CompatAbstractButtonWidget) {
+            WidgetManager.updateWidgetStatus(this, this.editable && ((CompatAbstractButtonWidget) this).oldIsFocused());
+        } else {
+            WidgetManager.updateWidgetStatus(this, this.editable && this.isFocused());
+        }
     }
 }

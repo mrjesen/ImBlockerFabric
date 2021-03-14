@@ -50,10 +50,13 @@ public class MixinManager implements IMixinConfigPlugin {
         if (mixinClassName.endsWith("mixin.MixinAbstractButtonWidget") && protocolVersion < 705) {
             return false;
         }
+        if (mixinClassName.endsWith("mixin.compat115.MixinAbstractButtonWidget") && protocolVersion >= 705) {
+            return false;
+        }
         if (!isRoughlyEnoughItemsApiLoaded && mixinClassName.startsWith(MIXIN_ROUGHLY_ENOUGH_ITEMS_API)) {
             return false;
         }
-        return !mixinClassName.endsWith("mixin.MixinAnvilScreen") || protocolVersion >= 705;
+        return true;
     }
 
     @Override
