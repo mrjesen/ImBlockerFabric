@@ -1,7 +1,6 @@
 package com.ddwhm.jesen.imblocker.mixin.rei;
 
 import com.ddwhm.jesen.imblocker.ImBlocker;
-import com.ddwhm.jesen.imblocker.ImManager;
 import me.shedaniel.rei.gui.widget.TextFieldWidget;
 import me.shedaniel.rei.gui.widget.WidgetWithBounds;
 import net.minecraft.util.Tickable;
@@ -17,9 +16,9 @@ public abstract class MixinTextFieldWidget extends WidgetWithBounds implements T
     private void presetFocused(boolean selected, CallbackInfo info) {
         ImBlocker.LOGGER.debug("AbstractButtonWidget.setFocused");
         if (selected) {
-            ImManager.makeOn();
+            ImBlocker.imManager.makeOn();
         } else {
-            ImManager.makeOff();
+            ImBlocker.imManager.makeOff();
         }
     }
 
@@ -27,9 +26,9 @@ public abstract class MixinTextFieldWidget extends WidgetWithBounds implements T
     private void postChangeFocus(boolean lookForwards, CallbackInfoReturnable<Boolean> cir) {
         ImBlocker.LOGGER.debug("AbstractButtonWidget.changeFocus");
         if (cir.getReturnValue()) {
-            ImManager.makeOn();
+            ImBlocker.imManager.makeOn();
         } else {
-            ImManager.makeOff();
+            ImBlocker.imManager.makeOff();
         }
     }
 }

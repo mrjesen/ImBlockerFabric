@@ -7,4 +7,4 @@ This mod fixes the typing bug that exists in Minecraft which annoyed foreign pla
 You can now type multi-byte characters in-game using Input Methods. (Tested in windows platform using chinese and japanese languages)
 
 
-### Supports >=1.14.4 and requires Fabric API
+### Supports >=1.14.4 and doesnot requires Fabric API

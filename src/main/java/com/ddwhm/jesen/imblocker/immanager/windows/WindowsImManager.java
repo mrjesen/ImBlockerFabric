@@ -1,22 +1,15 @@
-package com.ddwhm.jesen.imblocker;
+package com.ddwhm.jesen.imblocker.immanager.windows;
 
+import com.ddwhm.jesen.imblocker.ImBlocker;
+import com.ddwhm.jesen.imblocker.immanager.ImManager;
 import com.sun.jna.Native;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
 
-public class ImManager {
-    public enum Status {
-        INIT, ON, OFF
-    }
+public class WindowsImManager implements ImManager {
 
-    public static Status status = Status.INIT;
-
-    public enum OS {
-        WINDOWS, OTHERS
-    }
-
-    public static OS os = OS.OTHERS;
+    private boolean status = false;
 
     private static native WinNT.HANDLE ImmGetContext(WinDef.HWND hwnd);
 
@@ -34,13 +27,16 @@ public class ImManager {
 
     private static final User32 u = User32.INSTANCE;
 
+    public WindowsImManager() {
+        this.makeOff();
+    }
 
-    public static void makeOn() {
-        ImBlocker.LOGGER.debug("status:{} makeOn", ImManager.status);
-        if (ImManager.os != OS.WINDOWS || ImManager.status == Status.ON) {
+    public void makeOn() {
+        ImBlocker.LOGGER.debug("status:{} makeOn", status);
+        if (status) {
             return;
         }
-        ImManager.status = Status.ON;
+        status = true;
         WinDef.HWND hwnd = u.GetForegroundWindow();
         WinNT.HANDLE himc = ImmGetContext(hwnd);
         if (himc == null) {
@@ -50,31 +46,18 @@ public class ImManager {
         ImmReleaseContext(hwnd, himc);
     }
 
-    public static void makeOff() {
-        ImBlocker.LOGGER.debug("status:{} makeOff", ImManager.status);
-        if (ImManager.os != OS.WINDOWS || ImManager.status == Status.OFF) {
+    public void makeOff() {
+        ImBlocker.LOGGER.debug("status:{} makeOff", status);
+        if (!status) {
             return;
         }
-        ImManager.status = Status.OFF;
+        status = false;
         WinDef.HWND hwnd = u.GetForegroundWindow();
         WinNT.HANDLE himc = ImmAssociateContext(hwnd, null);
         if (himc != null) {
             ImmDestroyContext(himc);
         }
         ImmReleaseContext(hwnd, himc);
-    }
-
-    public static boolean toggle() {
-        WinDef.HWND hwnd = u.GetForegroundWindow();
-        WinNT.HANDLE himc = ImmAssociateContext(hwnd, null);
-        if (himc == null) {
-            himc = ImmCreateContext();
-            ImmAssociateContext(hwnd, himc);
-            ImmReleaseContext(hwnd, himc);
-            return true;
-        }
-        ImmReleaseContext(hwnd, himc);
-        return false;
     }
 }
 
