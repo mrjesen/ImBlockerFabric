@@ -8,3 +8,7 @@ You can now type multi-byte characters in-game using Input Methods. (Tested in w
 
 
 ### Supports >=1.14.4 and doesnot requires Fabric API
+
+## Star History
+
+![stars](https://starchart.cc/mrjesen/ImBlockerFabric)
