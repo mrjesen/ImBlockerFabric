@@ -16,7 +16,7 @@ import java.util.Set;
 
 public class MixinManager implements IMixinConfigPlugin {
     public static boolean isRoughlyEnoughItemsApiLoaded = false;
-    private static final String ROUGHLY_ENOUGH_ITEMS_API_MOD_ID = "roughlyenoughitems-api";
+    private static final String ROUGHLY_ENOUGH_ITEMS_API_MOD_ID = "roughlyenoughitems";
     private static final String MIXIN_ROUGHLY_ENOUGH_ITEMS_API = "com.ddwhm.jesen.imblocker.mixin.rei";
     public static int protocolVersion;
 
