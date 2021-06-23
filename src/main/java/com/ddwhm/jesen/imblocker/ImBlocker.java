@@ -36,6 +36,5 @@ public class ImBlocker implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         // Configurator.setLevel(LOGGER.getName(), Level.toLevel("DEBUG"));
-        LOGGER.debug("{} {}", imManager);
     }
 }

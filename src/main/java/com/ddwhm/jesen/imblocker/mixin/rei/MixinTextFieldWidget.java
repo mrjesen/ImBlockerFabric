@@ -1,34 +1,27 @@
 package com.ddwhm.jesen.imblocker.mixin.rei;
 
 import com.ddwhm.jesen.imblocker.ImBlocker;
-import me.shedaniel.rei.gui.widget.TextFieldWidget;
-import me.shedaniel.rei.gui.widget.WidgetWithBounds;
-import net.minecraft.util.Tickable;
+import com.ddwhm.jesen.imblocker.util.WidgetManager;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(TextFieldWidget.class)
-public abstract class MixinTextFieldWidget extends WidgetWithBounds implements Tickable {
-    @Inject(at = @At("HEAD"), method = "setFocused", remap = false)
+@Pseudo
+@Mixin(targets = {"me.shedaniel.rei.gui.widget.TextFieldWidget", "me.shedaniel.rei.impl.client.gui.widget.basewidgets.TextFieldWidget"}, remap = false)
+public abstract class MixinTextFieldWidget {
+    @Inject(at = @At("HEAD"), method = "setFocused")
     private void presetFocused(boolean selected, CallbackInfo info) {
-        ImBlocker.LOGGER.debug("AbstractButtonWidget.setFocused");
-        if (selected) {
-            ImBlocker.imManager.makeOn();
-        } else {
-            ImBlocker.imManager.makeOff();
-        }
+        ImBlocker.LOGGER.debug("ReiTextFieldWidget.setFocused");
+        WidgetManager.updateWidgetStatus(this, selected);
     }
 
-    @Inject(at = @At("RETURN"), method = "changeFocus")
-    private void postChangeFocus(boolean lookForwards, CallbackInfoReturnable<Boolean> cir) {
-        ImBlocker.LOGGER.debug("AbstractButtonWidget.changeFocus");
-        if (cir.getReturnValue()) {
-            ImBlocker.imManager.makeOn();
-        } else {
-            ImBlocker.imManager.makeOff();
-        }
+    @Inject(method = "isFocused", at = @At("RETURN"))
+    private void postIsFocused(CallbackInfoReturnable<Boolean> cir) {
+        // 更新 Widget 存活时间
+        ImBlocker.LOGGER.debug("ReiTextFieldWidget.isFocused");
+        WidgetManager.updateWidgetStatus(this, cir.getReturnValue());
     }
 }
