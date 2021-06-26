@@ -26,7 +26,7 @@ public class ImBlocker implements ClientModInitializer {
         }
 
         try {
-            imManager = (ImManager) Class.forName(className).newInstance();
+            imManager = (ImManager) Class.forName(className).getDeclaredConstructor().newInstance();
         } catch (Throwable e) {
             e.printStackTrace();
             imManager = new DummyImManager();
