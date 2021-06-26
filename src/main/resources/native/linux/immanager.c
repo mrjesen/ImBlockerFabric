@@ -13,6 +13,10 @@ int (*oldXFilterEvent)(void *, void *);
 static bool enable = false;
 static bool hooked = false;
 
+typedef union {
+    int type;
+    long pad[24];
+} XEvent;
 
 void *get_module_base(pid_t pid, const char *module_name)
 {
@@ -41,16 +45,23 @@ void *get_module_base(pid_t pid, const char *module_name)
     return (void *)addr;
 }
 
-bool myXFilterEvent(void *event, void *w)
+bool myXFilterEvent(XEvent *event, void *w)
 {
+    // 核心思路为判断当前事件是否为键盘事件，如果是键盘事件并且锁定输入法时则会阻止事件传递
+    // 否则传递所有事件
+    bool ret = true;
     if (enable)
     {
-        return oldXFilterEvent(event, w);
+        ret = oldXFilterEvent((void*)event, w);
     }
     else
     {
-        return true;
+        if (event->type - 2 > 1) // 非键盘事件则传递，键盘事件屏蔽，我也不知道对应的常量是多少，这段从 IDA 抄的
+        {
+            ret = oldXFilterEvent((void*)event, w);
+        }
     }
+    return ret;
 }
 
 void hook()
