@@ -9,7 +9,7 @@
 #include "com_ddwhm_jesen_imblocker_immanager_linux_LinuxImManager.h"
 
 int (*oldXFilterEvent)(void *, void *);
-
+void **got_addr;
 static bool enable = false;
 static bool hooked = false;
 
@@ -45,6 +45,18 @@ void *get_module_base(pid_t pid, const char *module_name)
     return (void *)addr;
 }
 
+bool myXFilterEvent(XEvent *event, void *w);
+
+void checkHook() {
+    // 若是 hook 发生在第一次解析 got 表前，则 oldXFilterEvent 会指向 XFilterEvent 的 plt 表
+    // 这时调用 oldXFilterEvent 会导致之前的 hook 失效，因此需要检查并更新 oldXFilterEvent
+    // 这么写可能存在条件竞争（但是我懒得改了）
+    if (*got_addr != (void*)&myXFilterEvent) {
+        oldXFilterEvent = *got_addr;
+        *got_addr = (void*)&myXFilterEvent;
+    }
+}
+
 bool myXFilterEvent(XEvent *event, void *w)
 {
     // 核心思路为判断当前事件是否为键盘事件，如果是键盘事件并且锁定输入法时则会阻止事件传递
@@ -61,6 +73,7 @@ bool myXFilterEvent(XEvent *event, void *w)
             ret = oldXFilterEvent((void*)event, w);
         }
     }
+    checkHook();
     return ret;
 }
 
@@ -142,12 +155,16 @@ void hook()
         if (memcmp(funcName, "XFilterEvent", sizeof("XFilterEvent")) == 0)
         {
             size_t page_size = getpagesize();
-            void **got_addr = (void **)(rel_table[i].r_offset + base_addr);
+            got_addr = (void **)(rel_table[i].r_offset + base_addr);
             oldXFilterEvent = *got_addr;
             fprintf(stderr, "old_function=%p new_function=%p\n", oldXFilterEvent, myXFilterEvent);
             fprintf(stderr, "got_addr=%p, page size=%p\n", got_addr, page_size);
             mprotect((void *)((size_t)got_addr & 0xfffffffffffff000), page_size, PROT_READ | PROT_WRITE);
             *got_addr = myXFilterEvent;
+            break;
+        }
+        if (i == pltRelSz - 1) {
+            fprintf(stderr, "can't found XFilterEvent addr.\n");
         }
     }
     return;
