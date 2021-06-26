@@ -9,13 +9,13 @@
     "MixinMinecraftClient",
     "MixinSignEditScreen",
     "MixinTextFieldWidget",
-    "rei.MixinTextFieldWidget"
+    "rei.MixinTextFieldWidget",
+    "libgui.MixinWWidget",
+    "libgui.MixinWTextField",
+    "compat115.MixinAbstractButtonWidget"
   ],
   "plugin": "com.ddwhm.jesen.imblocker.MixinManager",
   "injectors": {
     "defaultRequire": 1
-  },
-  "mixins": [
-    "compat115.MixinAbstractButtonWidget"
-  ]
+  }
 }
