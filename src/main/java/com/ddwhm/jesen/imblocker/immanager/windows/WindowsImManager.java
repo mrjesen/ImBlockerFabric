@@ -9,7 +9,7 @@ import com.sun.jna.platform.win32.WinNT;
 
 public class WindowsImManager implements ImManager {
 
-    private boolean status = false;
+    private boolean status = true;
 
     private static native WinNT.HANDLE ImmGetContext(WinDef.HWND hwnd);
 

@@ -9,23 +9,11 @@ import java.lang.reflect.Field;
 import java.util.Map;
 
 public class LinuxImManager implements ImManager {
-    private boolean status = false;
+    private boolean status = true;
 
 
     public LinuxImManager() {
         this.makeOff();
-    }
-
-    @SuppressWarnings({"unchecked"})
-    private static void updateEnv(String name, String val) {
-        Map<String, String> env = System.getenv();
-        try {
-            Field field = env.getClass().getDeclaredField("m");
-            field.setAccessible(true);
-            ((Map<String, String>) field.get(env)).put(name, val);
-        } catch (ReflectiveOperationException e) {
-            e.printStackTrace();
-        }
     }
 
     private native void disableIme();
@@ -34,8 +22,10 @@ public class LinuxImManager implements ImManager {
 
     private static void loadJNI() throws IOException {
         InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("native/linux/immanager.so");
-        File file = null;
-        file = File.createTempFile("lib", ".so");
+        if (is == null) {
+            throw new IOException("Can't open native/linux/immanager.so");
+        }
+        File file = File.createTempFile("lib", ".so");
         OutputStream os = new FileOutputStream(file);
         byte[] buffer = new byte[1024];
         int length;
