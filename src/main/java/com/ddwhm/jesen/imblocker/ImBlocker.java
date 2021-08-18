@@ -5,10 +5,8 @@ import com.ddwhm.jesen.imblocker.immanager.DummyImManager;
 import com.ddwhm.jesen.imblocker.immanager.ImManager;
 import net.fabricmc.api.ClientModInitializer;
 import org.apache.commons.lang3.SystemUtils;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.config.Configurator;
 
 
 public class ImBlocker implements ClientModInitializer {
