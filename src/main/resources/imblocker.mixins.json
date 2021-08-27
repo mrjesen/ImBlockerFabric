@@ -10,6 +10,7 @@
     "MixinSignEditScreen",
     "MixinTextFieldWidget",
     "rei.MixinTextFieldWidget",
+    "replay.MixinAbstractGuiTextField",
     "libgui.MixinWWidget",
     "libgui.MixinWTextField",
     "compat115.MixinAbstractButtonWidget"

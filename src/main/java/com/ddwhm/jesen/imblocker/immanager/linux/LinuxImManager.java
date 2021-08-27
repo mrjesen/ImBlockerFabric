@@ -2,11 +2,8 @@ package com.ddwhm.jesen.imblocker.immanager.linux;
 
 import com.ddwhm.jesen.imblocker.ImBlocker;
 import com.ddwhm.jesen.imblocker.immanager.ImManager;
-import com.sun.jna.Native;
 
 import java.io.*;
-import java.lang.reflect.Field;
-import java.util.Map;
 
 public class LinuxImManager implements ImManager {
     private boolean status = true;
@@ -38,7 +35,7 @@ public class LinuxImManager implements ImManager {
         file.deleteOnExit();
     }
 
-    static  {
+    static {
 
         try {
             loadJNI();
