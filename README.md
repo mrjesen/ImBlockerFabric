@@ -11,4 +11,4 @@ You can now type multi-byte characters in-game using Input Methods. (Tested in w
 
 ## Star History
 
-![stars](https://starchart.cc/mrjesen/ImBlockerFabric)
+![stars](https://starchart.cc/mrjesen/ImBlockerFabric.svg)
