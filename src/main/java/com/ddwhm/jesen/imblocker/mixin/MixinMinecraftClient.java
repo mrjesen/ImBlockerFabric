@@ -3,6 +3,7 @@ package com.ddwhm.jesen.imblocker.mixin;
 import com.ddwhm.jesen.imblocker.ImBlocker;
 import com.ddwhm.jesen.imblocker.util.WidgetManager;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.RunArgs;
 import net.minecraft.client.WindowEventHandler;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.snooper.SnooperListener;
@@ -17,6 +18,11 @@ public abstract class MixinMinecraftClient extends ReentrantThreadExecutor<Runna
 
     public MixinMinecraftClient(String string) {
         super(string);
+    }
+
+    @Inject(method = "<init>", at = @At("RETURN"))
+    private void postInit(RunArgs args, CallbackInfo ci) {
+        ImBlocker.imManager.makeOff();
     }
 
     @Inject(method = "openScreen", at = @At("HEAD"))

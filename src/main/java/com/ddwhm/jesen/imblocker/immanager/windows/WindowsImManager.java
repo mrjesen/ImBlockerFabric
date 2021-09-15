@@ -27,10 +27,6 @@ public class WindowsImManager implements ImManager {
 
     private static final User32 u = User32.INSTANCE;
 
-    public WindowsImManager() {
-        this.makeOff();
-    }
-
     public void makeOn() {
         ImBlocker.LOGGER.debug("status:{} makeOn", status);
         if (status) {
