@@ -8,11 +8,6 @@ import java.io.*;
 public class LinuxImManager implements ImManager {
     private boolean status = true;
 
-
-    public LinuxImManager() {
-        this.makeOff();
-    }
-
     private native void disableIme();
 
     private native void enableIme();
