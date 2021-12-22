@@ -4,28 +4,21 @@ import com.ddwhm.jesen.imblocker.ImBlocker;
 import com.ddwhm.jesen.imblocker.util.WidgetManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.RunArgs;
-import net.minecraft.client.WindowEventHandler;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.util.snooper.SnooperListener;
-import net.minecraft.util.thread.ReentrantThreadExecutor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MinecraftClient.class)
-public abstract class MixinMinecraftClient extends ReentrantThreadExecutor<Runnable> implements SnooperListener, WindowEventHandler {
-
-    public MixinMinecraftClient(String string) {
-        super(string);
-    }
+public abstract class MixinMinecraftClient {
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void postInit(RunArgs args, CallbackInfo ci) {
         ImBlocker.imManager.makeOff();
     }
 
-    @Inject(method = "openScreen", at = @At("HEAD"))
+    @Inject(method = "setScreen", at = @At("HEAD"))
     private void preOpenScreen(Screen screen, CallbackInfo info) {
         if (screen == null) {
             // 关闭 GUI 时关闭输入法
