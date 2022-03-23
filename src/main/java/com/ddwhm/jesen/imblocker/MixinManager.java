@@ -11,13 +11,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class MixinManager implements IMixinConfigPlugin {
-    public static boolean isRoughlyEnoughItemsApiLoaded = false;
-    private static final String ROUGHLY_ENOUGH_ITEMS_API_MOD_ID = "roughlyenoughitems";
-    private static final String MIXIN_ROUGHLY_ENOUGH_ITEMS_API = "com.ddwhm.jesen.imblocker.mixin.rei";
+
+    private static final Map<String, String> mixinDeps = new HashMap<>();
+
+    static {
+        mixinDeps.put("com.ddwhm.jesen.imblocker.mixin.rei", "roughlyenoughitems");
+        mixinDeps.put("com.ddwhm.jesen.imblocker.mixin.libgui", "libgui");
+        mixinDeps.put("com.ddwhm.jesen.imblocker.mixin.replay", "replaymod");
+    }
     public static int protocolVersion;
 
     // rewrite the getversion function to fix the issue #12
@@ -36,7 +43,6 @@ public class MixinManager implements IMixinConfigPlugin {
 
     @Override
     public void onLoad(String mixinPackage) {
-        isRoughlyEnoughItemsApiLoaded = FabricLoader.getInstance().isModLoaded(ROUGHLY_ENOUGH_ITEMS_API_MOD_ID);
         protocolVersion = getGameVersion();
     }
 
@@ -53,8 +59,10 @@ public class MixinManager implements IMixinConfigPlugin {
         if (mixinClassName.endsWith("mixin.compat115.MixinAbstractButtonWidget") && protocolVersion >= 705) {
             return false;
         }
-        if (!isRoughlyEnoughItemsApiLoaded && mixinClassName.startsWith(MIXIN_ROUGHLY_ENOUGH_ITEMS_API)) {
-            return false;
+        for (Map.Entry<String, String> entry: mixinDeps.entrySet()) {
+            if (mixinClassName.startsWith(entry.getKey())) {
+                return FabricLoader.getInstance().isModLoaded(entry.getValue());
+            }
         }
         return true;
     }
