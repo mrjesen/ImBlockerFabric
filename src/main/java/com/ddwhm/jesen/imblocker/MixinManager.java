@@ -59,6 +59,19 @@ public class MixinManager implements IMixinConfigPlugin {
         if (mixinClassName.endsWith("mixin.compat115.MixinAbstractButtonWidget") && protocolVersion >= 705) {
             return false;
         }
+        // 1.18.2 compat
+        if (mixinClassName.endsWith("mixin.MixinBookEditScreenLegacy") && protocolVersion >= 758) {
+            return false;
+        }
+        if (mixinClassName.endsWith("mixin.MixinBookEditScreen") && protocolVersion < 758) {
+            return false;
+        }
+        if (mixinClassName.endsWith("mixin.MixinSignEditScreenLegacy") && protocolVersion >= 758) {
+            return false;
+        }
+        if (mixinClassName.endsWith("mixin.MixinSignEditScreen") && protocolVersion < 758) {
+            return false;
+        }
         for (Map.Entry<String, String> entry: mixinDeps.entrySet()) {
             if (mixinClassName.startsWith(entry.getKey())) {
                 return FabricLoader.getInstance().isModLoaded(entry.getValue());
