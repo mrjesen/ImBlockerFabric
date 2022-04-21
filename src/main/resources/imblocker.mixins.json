@@ -6,14 +6,16 @@
   "client": [
     "MixinAbstractButtonWidget",
     "MixinBookEditScreen",
+    "MixinBookEditScreenLegacy",
     "MixinMinecraftClient",
     "MixinSignEditScreen",
+    "MixinSignEditScreenLegacy",
     "MixinTextFieldWidget",
-    "rei.MixinTextFieldWidget",
-    "replay.MixinAbstractGuiTextField",
-    "libgui.MixinWWidget",
+    "compat115.MixinAbstractButtonWidget",
     "libgui.MixinWTextField",
-    "compat115.MixinAbstractButtonWidget"
+    "libgui.MixinWWidget",
+    "rei.MixinTextFieldWidget",
+    "replay.MixinAbstractGuiTextField"
   ],
   "plugin": "com.ddwhm.jesen.imblocker.MixinManager",
   "injectors": {
