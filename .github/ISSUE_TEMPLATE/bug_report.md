@@ -3,7 +3,7 @@ name: Bug report
 about: Report your bug to me by github
 title: '[BUG] '
 labels: bug
-assignees: mrjesen
+assignees: mrjesen, plusls
 
 ---
 
