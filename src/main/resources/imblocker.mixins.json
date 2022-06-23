@@ -8,6 +8,7 @@
     "MixinBookEditScreen",
     "MixinBookEditScreenLegacy",
     "MixinMinecraftClient",
+    "MixinSignBlockEntityLegacy",
     "MixinSignEditScreen",
     "MixinSignEditScreenLegacy",
     "MixinTextFieldWidget",

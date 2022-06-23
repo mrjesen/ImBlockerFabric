@@ -23,8 +23,9 @@ public class MixinSignEditScreenLegacy {
         WidgetManager.updateWidgetStatus(this, false);
     }
 
-    @Inject(at = @At("RETURN"), method = "tick", remap = false)
+    //@Inject(at = @At("RETURN"), method = "method_25393")
     private void postTick(CallbackInfo ci) {
         WidgetManager.updateLifeTime(this);
     }
 }
+

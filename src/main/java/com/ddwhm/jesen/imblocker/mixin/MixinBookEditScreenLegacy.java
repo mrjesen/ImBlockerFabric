@@ -23,8 +23,9 @@ public class MixinBookEditScreenLegacy {
         WidgetManager.updateWidgetStatus(this, false);
     }
 
-    @Inject(at = @At("RETURN"), method = "tick", remap = false)
-    private void postTick(CallbackInfo ci) {
+    @Inject(at = @At("RETURN"), method = "updateButtons")
+    private void postUpdateButtons(CallbackInfo ci) {
+        ImBlocker.LOGGER.debug("BookEditScreen.UpdateButtons");
         WidgetManager.updateLifeTime(this);
     }
 }
