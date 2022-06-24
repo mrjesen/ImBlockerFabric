@@ -19,13 +19,13 @@ import java.util.Set;
 public class MixinManager implements IMixinConfigPlugin {
 
     private static final Map<String, String> mixinDeps = new HashMap<>();
-    // private static final HashMap<String, int> versionMap = new HashMap<>();
+    private static final HashMap<String, Integer> versionMap = new HashMap<>();
 
     static {
         mixinDeps.put("com.ddwhm.jesen.imblocker.mixin.rei", "roughlyenoughitems");
         mixinDeps.put("com.ddwhm.jesen.imblocker.mixin.libgui", "libgui");
         mixinDeps.put("com.ddwhm.jesen.imblocker.mixin.replay", "replaymod");
-        /*
+
         versionMap.put("1.19",759);
         versionMap.put("1.18.2",758);
         versionMap.put("1.18.1",757);
@@ -47,7 +47,6 @@ public class MixinManager implements IMixinConfigPlugin {
         versionMap.put("1.14.1",480);
         versionMap.put("1.14",477);
         versionMap.put("1.13.2",404);
-        */
     }
     public static int protocolVersion;
 
@@ -74,28 +73,48 @@ public class MixinManager implements IMixinConfigPlugin {
         return null;
     }
 
+    public boolean isSatisfied(String cond,String ver){
+        try{
+            switch (cond) {
+                case ">":
+                    return protocolVersion > versionMap.get(ver);
+                case ">=":
+                    return protocolVersion >= versionMap.get(ver);
+                case "<":
+                    return protocolVersion < versionMap.get(ver);
+                case "<=":
+                    return protocolVersion <= versionMap.get(ver);
+                case "==":
+                    return protocolVersion == versionMap.get(ver);
+            }
+        }catch (Exception e){
+            return true;
+        }
+        return true;
+    }
+
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.endsWith("mixin.MixinAbstractButtonWidget") && protocolVersion < 705) { // version < 1.16
+        if (mixinClassName.endsWith("mixin.MixinAbstractButtonWidget") && isSatisfied("<","1.16")) {
             return false;
         }
-        if (mixinClassName.endsWith("mixin.compat115.MixinAbstractButtonWidget") && protocolVersion >= 705) { //version >= 1.16
+        if (mixinClassName.endsWith("mixin.compat115.MixinAbstractButtonWidget") && isSatisfied(">=","1.16")) {
             return false;
         }
         // 1.18.2 compat
-        if (mixinClassName.endsWith("mixin.MixinBookEditScreenLegacy") && protocolVersion >= 758) { // version >= 1.18.2
+        if (mixinClassName.endsWith("mixin.MixinBookEditScreenLegacy") && isSatisfied(">=","1.18.2")) {
             return false;
         }
-        if (mixinClassName.endsWith("mixin.MixinBookEditScreen") && protocolVersion < 758) { // version < 1.18.2
+        if (mixinClassName.endsWith("mixin.MixinBookEditScreen") && isSatisfied("<","1.18.2")) {
             return false;
         }
-        if (mixinClassName.endsWith("mixin.MixinSignEditScreenLegacy") && protocolVersion >= 758) { // version >= 1.18.2
+        if (mixinClassName.endsWith("mixin.MixinSignEditScreenLegacy") && isSatisfied(">=","1.18.2")) {
             return false;
         }
-        if (mixinClassName.endsWith("mixin.MixinSignBlockEntityLegacy") && protocolVersion >= 758) { // version >= 1.18.2
+        if (mixinClassName.endsWith("mixin.MixinSignBlockEntityLegacy") && isSatisfied(">=","1.18.2")) {
             return false;
         }
-        if (mixinClassName.endsWith("mixin.MixinSignEditScreen") && protocolVersion < 758) { // version < 1.18.2
+        if (mixinClassName.endsWith("mixin.MixinSignEditScreen") && isSatisfied("<","1.18.2")) {
             return false;
         }
 
