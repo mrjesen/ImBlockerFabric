@@ -55,5 +55,9 @@ public class WindowsImManager implements ImManager {
         }
         ImmReleaseContext(hwnd, himc);
     }
+
+    public boolean getStatus() {
+        return status;
+    }
 }
 

@@ -26,6 +26,7 @@ public class MixinManager implements IMixinConfigPlugin {
         mixinDeps.put("com.ddwhm.jesen.imblocker.mixin.libgui", "libgui");
         mixinDeps.put("com.ddwhm.jesen.imblocker.mixin.replay", "replaymod");
 
+        versionMap.put("1.19.3",761);
         versionMap.put("1.19",759);
         versionMap.put("1.18.2",758);
         versionMap.put("1.18.1",757);
@@ -115,6 +116,12 @@ public class MixinManager implements IMixinConfigPlugin {
             return false;
         }
         if (mixinClassName.endsWith("mixin.MixinSignEditScreen") && isSatisfied("<","1.18.2")) {
+            return false;
+        }
+        if (mixinClassName.endsWith("mixin.MixinSignEditScreen") && isSatisfied(">=","1.19.3")) {
+            return false;
+        }
+        if (mixinClassName.endsWith("mixin.MixinAbstractSignEditScreen") && isSatisfied("<","1.19.3")) {
             return false;
         }
 

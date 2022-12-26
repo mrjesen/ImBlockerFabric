@@ -56,4 +56,8 @@ public class LinuxImManager implements ImManager {
         status = false;
         disableIme();
     }
+
+    public boolean getStatus() {
+        return status;
+    }
 }

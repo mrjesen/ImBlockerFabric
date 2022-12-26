@@ -6,4 +6,8 @@ public interface ImManager {
 
     default void makeOff() {
     }
+
+    default boolean getStatus() {
+        return false;
+    }
 }

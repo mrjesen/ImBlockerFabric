@@ -17,14 +17,16 @@ public class MixinSignEditScreen {
         WidgetManager.updateWidgetStatus(this, true);
     }
 
-    @Inject(at = @At("RETURN"), method = "finishEditing")
-    private void postFinishEditing(CallbackInfo info) {
-        ImBlocker.LOGGER.debug("SignEditScreen.finishEditing");
-        WidgetManager.updateWidgetStatus(this, false);
-    }
+//    @Inject(at = @At("RETURN"), method = "finishEditing")
+//    private void postFinishEditing(CallbackInfo info) {
+//        ImBlocker.LOGGER.debug("SignEditScreen.finishEditing");
+//        WidgetManager.updateWidgetStatus(this, false);
+//    }
+//    无需注入了，1.19.3无这个反混淆了。
 
-    @Inject(at = @At("RETURN"), method = "tick")
-    private void postTick(CallbackInfo ci) {
-        WidgetManager.updateLifeTime(this);
-    }
+//    @Inject(at = @At("RETURN"), method = "tick")
+//    private void postTick(CallbackInfo ci) {
+//        WidgetManager.updateLifeTime(this);
+//    }
+//    无需注入了，1.19.3无这个反混淆了。
 }
