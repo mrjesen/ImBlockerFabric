@@ -124,6 +124,9 @@ public class MixinManager implements IMixinConfigPlugin {
         if (mixinClassName.endsWith("mixin.MixinMinecraftClientAfter16") && isSatisfied("<","1.16")) {
             return false;
         }
+        if (mixinClassName.endsWith("mixin.MixinAbstractSignEditScreen") && isSatisfied("<","1.15")) {
+            return false;
+        }
 
         for (Map.Entry<String, String> entry: mixinDeps.entrySet()) {
             if (mixinClassName.startsWith(entry.getKey())) {
