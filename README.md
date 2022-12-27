@@ -6,12 +6,12 @@ IMBlockerFabric is a mod which hides the IME (Input Method Editor) where enterin
 This mod fixes the typing bug that exists in Minecraft which annoyed foreign players for a long time meaning you can now type multi-byte characters in-game using Input Methods. (Tested in windows and linux platforms using chinese and japanese languages)
 
 
-### Supports >=1.14.4 and does not require Fabric API!
+### Supports >=1.14.4 and require Fabric API!
 
 ### Tested on these versions
 *but only with mod FabricAPI and IMBlockerFabric*
 
-MC 1.19,
+MC 1.19.3,
 MC 1.18.2,
 MC 1.17.1,
 MC 1.16.5,
