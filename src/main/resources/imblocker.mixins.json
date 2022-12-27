@@ -9,6 +9,7 @@
     "MixinBookEditScreen",
     "MixinBookEditScreenLegacy",
     "MixinMinecraftClient",
+    "MixinMinecraftClientAfter16",
     "MixinSignBlockEntityLegacy",
     "MixinSignEditScreen",
     "MixinSignEditScreenLegacy",
