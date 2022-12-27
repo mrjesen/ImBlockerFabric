@@ -11,10 +11,12 @@ assignees: mrjesen, plusls
 A clear and concise description of what the bug is.
 
 **Client Software**
-HMCL (MC: 1.16.5)
+PCL2 (MC: 1.19.3)
 
 **mods**
+ - IMBlockerFabric v1.x.x
  - OptiFine H3 G2
+ - OptiFabric 1.19.3
 
 **To Reproduce**
 Steps to reproduce the behavior:
@@ -28,7 +30,7 @@ If applicable, add screenshots to help explain your problem.
 
 **Environment (Please complete the following information):**
  - OS: [e.g. Windows 10 2002]
- - JRE: [e.g.1.8.0_261]
+ - JRE: [e.g.17.0.1_261]
 
 **Additional context**
 Add any other context about the problem here.
