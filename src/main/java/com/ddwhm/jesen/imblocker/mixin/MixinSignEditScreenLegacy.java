@@ -17,15 +17,5 @@ public class MixinSignEditScreenLegacy {
         WidgetManager.updateWidgetStatus(this, true);
     }
 
-    @Inject(at = @At("RETURN"), method = "finishEditing")
-    private void postFinishEditing(CallbackInfo info) {
-        ImBlocker.LOGGER.debug("SignEditScreen.finishEditing");
-        WidgetManager.updateWidgetStatus(this, false);
-    }
-
-    //@Inject(at = @At("RETURN"), method = "method_25393")
-    private void postTick(CallbackInfo ci) {
-        WidgetManager.updateLifeTime(this);
-    }
 }
 

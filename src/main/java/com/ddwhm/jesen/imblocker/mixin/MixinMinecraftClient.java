@@ -20,10 +20,17 @@ public abstract class MixinMinecraftClient {
             ImBlocker.imManager.makeOff();
             firstSetScreen = false;
         }
+        if(screen != null ){
+//            ImBlocker.LOGGER.info(screen.getTitle().toString());
+        }
+
         if (screen == null) {
             // 关闭 GUI 时关闭输入法
-            ImBlocker.LOGGER.debug("MixinMinecraftClient.openScreen");
+            ImBlocker.LOGGER.debug("MixinMinecraftClient.setScreen");
             WidgetManager.clear();
+        }else if(screen.getTitle().toString().contains("sign.edit")){
+            ImBlocker.LOGGER.debug("MixinMinecraftClient.sign.edit");
+            WidgetManager.updateWidgetStatus(this, true);
         }
     }
 

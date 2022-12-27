@@ -121,7 +121,7 @@ public class MixinManager implements IMixinConfigPlugin {
         if (mixinClassName.endsWith("mixin.MixinSignEditScreen") && isSatisfied(">=","1.19.3")) {
             return false;
         }
-        if (mixinClassName.endsWith("mixin.MixinAbstractSignEditScreen") && isSatisfied("<","1.19.3")) {
+        if (mixinClassName.endsWith("mixin.MixinAbs1tractSignEditScreen") && isSatisfied("<","1.19.3")) {
             return false;
         }
 

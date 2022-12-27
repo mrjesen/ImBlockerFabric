@@ -38,7 +38,7 @@ public class ImBlocker implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         // 配置键盘绑定
-        KeyBinding keyIMBlocker = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.imblocker.switchIMEState", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_P, "category.imblockerfabric.name"));
+        KeyBinding keyIMBlocker = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.imblocker.switchIMEState", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_F6, "category.imblockerfabric.name"));
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (keyIMBlocker.wasPressed()) {
                 if(imManager.getStatus()){
