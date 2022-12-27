@@ -14,7 +14,7 @@ public abstract class MixinMinecraftClientAfter16 {
 
     @Inject(method = "setScreen", at = @At("HEAD"))
     private void preOpenScreen(Screen screen, CallbackInfo info) {
-        if(screen.getTitle().toString().contains("sign.edit")){
+        if(screen !=null && screen.getTitle().toString().contains("sign.edit")){
             ImBlocker.LOGGER.debug("MixinMinecraftClient.sign.edit");
             WidgetManager.updateWidgetStatus(this, true);
         }
