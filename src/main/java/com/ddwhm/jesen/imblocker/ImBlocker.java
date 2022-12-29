@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 import org.lwjgl.glfw.GLFW;
 
 public class ImBlocker implements ClientModInitializer {
-    public static final Logger LOGGER = LogManager.getLogger("ImBlocker");
+    public static final Logger LOGGER = LogManager.getLogger("IMBlocker");
     public static ImManager imManager;
 
     static {
