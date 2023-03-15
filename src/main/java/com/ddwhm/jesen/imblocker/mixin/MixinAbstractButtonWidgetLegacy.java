@@ -6,17 +6,18 @@ import com.ddwhm.jesen.imblocker.util.WidgetManager;
 import net.minecraft.client.gui.Drawable;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.Element;
-import net.minecraft.client.gui.navigation.GuiNavigation;
-import net.minecraft.client.gui.navigation.GuiNavigationPath;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ClickableWidget.class)
-public abstract class MixinAbstractButtonWidget extends DrawableHelper implements Drawable, Element {
+public abstract class MixinAbstractButtonWidgetLegacy extends DrawableHelper implements Drawable, Element {
+
+    @Shadow public abstract boolean isFocused();
 
     // Fuck remap
     @Inject(method = {"setFocused", "method_25365"}, at = @At("RETURN"))
@@ -42,14 +43,15 @@ public abstract class MixinAbstractButtonWidget extends DrawableHelper implement
         WidgetManager.updateLifeTime(this);
     }
 
-    @Inject(method = "getNavigationPath", at = @At("RETURN"))
-    private void postChangeFocus(GuiNavigation navigation, CallbackInfoReturnable<GuiNavigationPath> cir) {
+    // Fuck remap
+    @Inject(method = {"changeFocus", "method_25407"}, at = @At("RETURN"))
+    private void postChangeFocus(boolean lookForwards, CallbackInfoReturnable<Boolean> cir) {
         if (this instanceof TextFieldWidgetInvoker) {
             ImBlocker.LOGGER.debug("AbstractButtonWidget.changeFocus");
             ((TextFieldWidgetInvoker) this).updateWidgetStatus();
         } else if (this.getClass().getName().toLowerCase().contains("text")) {
             ImBlocker.LOGGER.debug("AbstractButtonWidget.changeFocus");
-            WidgetManager.updateWidgetStatus(this, this.isFocused());
+            WidgetManager.updateWidgetStatus(this, cir.getReturnValue());
         }
     }
 }
