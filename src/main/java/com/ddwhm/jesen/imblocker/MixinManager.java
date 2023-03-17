@@ -26,6 +26,7 @@ public class MixinManager implements IMixinConfigPlugin {
         mixinDeps.put("com.ddwhm.jesen.imblocker.mixin.libgui", "libgui");
         mixinDeps.put("com.ddwhm.jesen.imblocker.mixin.replay", "replaymod");
 
+        versionMap.put("1.19.4",762);
         versionMap.put("1.19.3",761);
         versionMap.put("1.19",759);
         versionMap.put("1.18.2",758);
@@ -96,7 +97,7 @@ public class MixinManager implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.endsWith("mixin.MixinAbstractButtonWidget") && isSatisfied("<","1.16")) {
+        if (mixinClassName.endsWith("mixin.MixinAbstractButtonWidget") && isSatisfied("<","1.19.4")) {
             return false;
         }
         if (mixinClassName.endsWith("mixin.compat115.MixinAbstractButtonWidget") && isSatisfied(">=","1.16")) {
@@ -124,7 +125,10 @@ public class MixinManager implements IMixinConfigPlugin {
         if (mixinClassName.endsWith("mixin.MixinMinecraftClientAfter16") && isSatisfied("<","1.16")) {
             return false;
         }
-        if (mixinClassName.endsWith("mixin.MixinAbstractSignEditScreen") && isSatisfied("<","1.15")) {
+        if (mixinClassName.endsWith("mixin.MixinAbstractSignEditScreen") && isSatisfied("<","1.18.2")) {
+            return false;
+        }
+        if (mixinClassName.endsWith("mixin.MixinAbstractButtonWidgetLegacy") && (isSatisfied("<","1.16") || isSatisfied(">=", "1.19.4"))) {
             return false;
         }
 

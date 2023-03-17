@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(BookEditScreen.class)
 public class MixinBookEditScreenLegacy {
 
-    @Inject(at = @At("RETURN"), method = "<init>")
+    @Inject(at = @At("RETURN"), method = "<init>", remap = false)
     private void postInit(CallbackInfo info) {
         ImBlocker.LOGGER.debug("BookEditScreen.<init>");
         WidgetManager.updateWidgetStatus(this, true);
