@@ -25,6 +25,7 @@ public class MixinManager implements IMixinConfigPlugin {
         mixinDeps.put("com.ddwhm.jesen.imblocker.mixin.rei", "roughlyenoughitems");
         mixinDeps.put("com.ddwhm.jesen.imblocker.mixin.libgui", "libgui");
         mixinDeps.put("com.ddwhm.jesen.imblocker.mixin.replay", "replaymod");
+        mixinDeps.put("com.ddwhm.jesen.imblocker.mixin.ftbquests", "ftbquests");
 
         versionMap.put("1.19.4",762);
         versionMap.put("1.19.3",761);
