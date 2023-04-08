@@ -16,13 +16,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class MixinTextFieldWidget {
 
     @Dynamic
-    @Inject(at = @At("HEAD"), method = "setFocused")
+    // Fuck remap
+    @Inject(at = @At("HEAD"), method = {"setFocused", "method_25365"})
     private void presetFocused(boolean selected, CallbackInfo info) {
         ImBlocker.LOGGER.debug("ReiTextFieldWidget.setFocused");
         WidgetManager.updateWidgetStatus(this, selected);
     }
     @Dynamic
-    @Inject(method = "isFocused", at = @At("RETURN"))
+    // Fuck remap
+    @Inject(method = {"isFocused", "method_25370"}, at = @At("RETURN"))
     private void postIsFocused(CallbackInfoReturnable<Boolean> cir) {
         // 更新 Widget 存活时间
         ImBlocker.LOGGER.debug("ReiTextFieldWidget.isFocused");
