@@ -77,23 +77,24 @@ public class MixinManager implements IMixinConfigPlugin {
     }
 
     public boolean isSatisfied(String cond,String ver){
-        try{
-            switch (cond) {
-                case ">":
-                    return protocolVersion > versionMap.get(ver);
-                case ">=":
-                    return protocolVersion >= versionMap.get(ver);
-                case "<":
-                    return protocolVersion < versionMap.get(ver);
-                case "<=":
-                    return protocolVersion <= versionMap.get(ver);
-                case "==":
-                    return protocolVersion == versionMap.get(ver);
-            }
-        }catch (Exception e){
+        if (!versionMap.containsKey(ver)) {
             return true;
         }
-        return true;
+        int targetVersion = versionMap.get(ver);
+        switch (cond) {
+            case ">":
+                return protocolVersion > targetVersion;
+            case ">=":
+                return protocolVersion >= targetVersion;
+            case "<":
+                return protocolVersion < targetVersion;
+            case "<=":
+                return protocolVersion <= targetVersion;
+            case "==":
+                return protocolVersion == targetVersion;
+            default:
+                return true;
+        }
     }
 
     @Override
