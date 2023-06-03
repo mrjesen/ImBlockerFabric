@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class MixinQuestsTextBox {
     @Dynamic
     @Inject(at = @At("HEAD"), method = "setFocused")
-    private void presetFocused(boolean setFocused, CallbackInfoReturnable<Object> info) {
+    private void presetFocused(boolean setFocused) {
         ImBlocker.LOGGER.debug("FTBQuests.TextBox.setFocused");
         WidgetManager.updateWidgetStatus(this, setFocused);
     }
