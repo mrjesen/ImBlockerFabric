@@ -1,6 +1,7 @@
 package com.ddwhm.jesen.imblocker.mixin;
 
 import com.ddwhm.jesen.imblocker.ImBlocker;
+import com.ddwhm.jesen.imblocker.ProcessMinecraftClient;
 import com.ddwhm.jesen.imblocker.util.WidgetManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
@@ -10,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MinecraftClient.class)
-public abstract class MixinMinecraftClient {
+public abstract class MixinMinecraftClientBefore16 {
 
     boolean firstSetScreen = false;
 
@@ -21,11 +22,7 @@ public abstract class MixinMinecraftClient {
             firstSetScreen = false;
         }
 
-        if (screen == null) {
-            // 关闭 GUI 时关闭输入法
-            ImBlocker.LOGGER.debug("MixinMinecraftClient.setScreen");
-            WidgetManager.clear();
-        }
+        ProcessMinecraftClient.ProcessScreen(screen);
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
@@ -33,4 +30,6 @@ public abstract class MixinMinecraftClient {
         // 每 tick + 1，超过 1s 没动作的 widget 则移除
         WidgetManager.tick();
     }
+
+
 }

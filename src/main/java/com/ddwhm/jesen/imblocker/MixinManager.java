@@ -27,6 +27,7 @@ public class MixinManager implements IMixinConfigPlugin {
         mixinDeps.put("com.ddwhm.jesen.imblocker.mixin.replay", "replaymod");
         mixinDeps.put("com.ddwhm.jesen.imblocker.mixin.ftbquests", "ftbquests");
 
+        versionMap.put("1.20.1",763);
         versionMap.put("1.19.4",762);
         versionMap.put("1.19.3",761);
         versionMap.put("1.19",759);
@@ -53,7 +54,7 @@ public class MixinManager implements IMixinConfigPlugin {
     }
     public static int protocolVersion;
 
-    private static int getGameVersion() {
+    public static int getGameVersion() {
         try (
                 final InputStream stream = IMixinConfigPlugin.class.getResourceAsStream("/version.json");
                 final Reader reader = new InputStreamReader(stream)
@@ -68,9 +69,10 @@ public class MixinManager implements IMixinConfigPlugin {
 
     @Override
     public void onLoad(String mixinPackage) {
-        protocolVersion = getGameVersion();
+        protocolVersion = MixinManager.getGameVersion();
     }
 
+    // TODO: refmap配置
     @Override
     public String getRefMapperConfig() {
         return null;
@@ -105,31 +107,11 @@ public class MixinManager implements IMixinConfigPlugin {
         if (mixinClassName.endsWith("mixin.compat115.MixinAbstractButtonWidget") && isSatisfied(">=","1.16")) {
             return false;
         }
-        // 1.18.2 compat
-        if (mixinClassName.endsWith("mixin.MixinBookEditScreenLegacy") && isSatisfied(">=","1.18.2")) {
-            return false;
-        }
-        if (mixinClassName.endsWith("mixin.MixinBookEditScreen") && isSatisfied("<","1.18.2")) {
-            return false;
-        }
-        if (mixinClassName.endsWith("mixin.MixinSignEditScreenLegacy") && isSatisfied(">=","1.18.2")) {
-            return false;
-        }
-        if (mixinClassName.endsWith("mixin.MixinSignBlockEntityLegacy") && isSatisfied(">=","1.18.2")) {
-            return false;
-        }
-        if (mixinClassName.endsWith("mixin.MixinSignEditScreen") && isSatisfied("<","1.18.2")) {
-            return false;
-        }
-        if (mixinClassName.endsWith("mixin.MixinSignEditScreen") && isSatisfied(">=","1.19.3")) {
-            return false;
-        }
+
         if (mixinClassName.endsWith("mixin.MixinMinecraftClientAfter16") && isSatisfied("<","1.16")) {
             return false;
         }
-        if (mixinClassName.endsWith("mixin.MixinAbstractSignEditScreen") && isSatisfied("<","1.18.2")) {
-            return false;
-        }
+
         if (mixinClassName.endsWith("mixin.MixinAbstractButtonWidgetLegacy") && (isSatisfied("<","1.16") || isSatisfied(">=", "1.19.4"))) {
             return false;
         }

@@ -17,7 +17,7 @@ public abstract class MixinQuestsTextField {
     @Inject(at = @At("RETURN"), method = "<init>")
     private void postInit(boolean setFocused, CallbackInfoReturnable<Object> info) {
         ImBlocker.LOGGER.debug("FTBQuests.TextField.<init>");
-        WidgetManager.updateWidgetStatus(this, true);
+        WidgetManager.updateWidgetStatus("ftbquests.TextField", true);
     }
 
 }

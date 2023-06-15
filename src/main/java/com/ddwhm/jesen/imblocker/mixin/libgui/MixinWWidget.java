@@ -1,6 +1,7 @@
 package com.ddwhm.jesen.imblocker.mixin.libgui;
 
 import com.ddwhm.jesen.imblocker.ImBlocker;
+import com.ddwhm.jesen.imblocker.util.WidgetManager;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
@@ -16,7 +17,7 @@ public class MixinWWidget {
     private void postOnFocusLost(CallbackInfo info) {
         if (this.getClass().getName().toLowerCase().contains("text")) {
             ImBlocker.LOGGER.debug("WWidget.onFocusLost");
-            ImBlocker.imManager.makeOff();
+            WidgetManager.updateWidgetStatus("libgui.WWidget", false);
         }
     }
     @Dynamic
@@ -24,7 +25,7 @@ public class MixinWWidget {
     private void postOnFocusGained(CallbackInfo info) {
         if (this.getClass().getName().toLowerCase().contains("text")) {
             ImBlocker.LOGGER.debug("WWidget.onFocusGained");
-            ImBlocker.imManager.makeOn();
+            WidgetManager.updateWidgetStatus("libgui.WWidget", true);
         }
     }
 }

@@ -34,9 +34,9 @@ public abstract class MixinTextFieldWidget extends ClickableWidget implements Dr
     public void updateWidgetStatus() {
         // 铁砧之类会设置 editable
         if (this instanceof CompatAbstractButtonWidget) {
-            WidgetManager.updateWidgetStatus(this, this.editable && ((CompatAbstractButtonWidget) this).oldIsFocused());
+            WidgetManager.updateWidgetStatus("TextFieldWidget", this.editable && ((CompatAbstractButtonWidget) this).oldIsFocused());
         } else {
-            WidgetManager.updateWidgetStatus(this, this.editable && this.isFocused());
+            WidgetManager.updateWidgetStatus("TextFieldWidget", this.editable && this.isFocused());
         }
     }
 }

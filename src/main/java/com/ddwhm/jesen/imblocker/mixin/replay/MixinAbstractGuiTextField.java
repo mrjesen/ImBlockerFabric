@@ -16,13 +16,13 @@ public abstract class MixinAbstractGuiTextField {
     @Inject(at = @At("HEAD"), method = "setFocused")
     private void presetFocused(boolean setFocused, CallbackInfoReturnable<Object> info) {
         ImBlocker.LOGGER.debug("jGuiAbstractGuiTextField.setFocused");
-        WidgetManager.updateWidgetStatus(this, setFocused);
+        WidgetManager.updateWidgetStatus("replay.AbstractGuiTextField", setFocused);
     }
     @Dynamic
     @Inject(method = "isFocused", at = @At("RETURN"))
     private void postIsFocused(CallbackInfoReturnable<Boolean> cir) {
         // 更新 Widget 存活时间
         ImBlocker.LOGGER.debug("jGuiAbstractGuiTextField.isFocused");
-        WidgetManager.updateWidgetStatus(this, cir.getReturnValue());
+        WidgetManager.updateWidgetStatus("replay.AbstractGuiTextField", cir.getReturnValue());
     }
 }

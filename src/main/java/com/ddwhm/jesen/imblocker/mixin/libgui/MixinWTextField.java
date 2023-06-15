@@ -1,6 +1,7 @@
 package com.ddwhm.jesen.imblocker.mixin.libgui;
 
 import com.ddwhm.jesen.imblocker.ImBlocker;
+import com.ddwhm.jesen.imblocker.util.WidgetManager;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
@@ -15,6 +16,6 @@ public class MixinWTextField {
     @Inject(method = "onFocusGained", at = @At("RETURN"))
     private void postOnFocusGained(CallbackInfo info) {
         ImBlocker.LOGGER.debug("MixinWTextField.onFocusGained");
-        ImBlocker.imManager.makeOn();
+        WidgetManager.updateWidgetStatus("libgui.WTextField", true);
     }
 }

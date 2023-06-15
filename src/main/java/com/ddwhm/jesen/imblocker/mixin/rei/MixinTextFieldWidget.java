@@ -5,7 +5,6 @@ import com.ddwhm.jesen.imblocker.util.WidgetManager;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -20,7 +19,7 @@ public abstract class MixinTextFieldWidget {
     @Inject(at = @At("HEAD"), method = {"setFocused", "method_25365"})
     private void presetFocused(boolean selected, CallbackInfo info) {
         ImBlocker.LOGGER.debug("ReiTextFieldWidget.setFocused");
-        WidgetManager.updateWidgetStatus(this, selected);
+        WidgetManager.updateWidgetStatus("rei.TextFieldWidget", selected);
     }
     @Dynamic
     // Fuck remap
@@ -28,6 +27,6 @@ public abstract class MixinTextFieldWidget {
     private void postIsFocused(CallbackInfoReturnable<Boolean> cir) {
         // 更新 Widget 存活时间
         ImBlocker.LOGGER.debug("ReiTextFieldWidget.isFocused");
-        WidgetManager.updateWidgetStatus(this, cir.getReturnValue());
+        WidgetManager.updateWidgetStatus("rei.TextFieldWidget", cir.getReturnValue());
     }
 }

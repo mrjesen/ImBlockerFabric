@@ -16,13 +16,13 @@ public abstract class MixinQuestsTextBox {
     @Inject(at = @At("HEAD"), method = "setFocused")
     private void presetFocused(boolean setFocused) {
         ImBlocker.LOGGER.debug("FTBQuests.TextBox.setFocused");
-        WidgetManager.updateWidgetStatus(this, setFocused);
+        WidgetManager.updateWidgetStatus("ftbquests.TextBox", setFocused);
     }
     @Dynamic
     @Inject(method = "isFocused", at = @At("RETURN"))
     private void postIsFocused(CallbackInfoReturnable<Boolean> cir) {
         // 更新 Widget 存活时间
         ImBlocker.LOGGER.debug("FTBQuests.TextBox.isFocused");
-        WidgetManager.updateWidgetStatus(this, cir.getReturnValue());
+        WidgetManager.updateWidgetStatus("ftbquests.TextBox", cir.getReturnValue());
     }
 }
