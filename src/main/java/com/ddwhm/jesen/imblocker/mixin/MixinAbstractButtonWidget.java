@@ -27,7 +27,7 @@ public abstract class MixinAbstractButtonWidget extends DrawableHelper implement
             ((TextFieldWidgetInvoker) this).updateWidgetStatus();
         } else if (this.getClass().getName().toLowerCase().contains("text")) {
             ImBlocker.LOGGER.debug("AbstractButtonWidget.setFocused");
-            WidgetManager.updateWidgetStatus("ClickableWidget", selected);
+            WidgetManager.updateWidgetStatus("TextFieldWidget", selected);
         }
     }
 
@@ -39,7 +39,7 @@ public abstract class MixinAbstractButtonWidget extends DrawableHelper implement
             return;
         }
         ImBlocker.LOGGER.debug("AbstractButtonWidget.isFocused");
-        WidgetManager.updateLifeTime("ClickableWidget");
+        WidgetManager.updateLifeTime("TextFieldWidget");
     }
 
     @Inject(method = "getNavigationPath", at = @At("RETURN"))
@@ -49,7 +49,7 @@ public abstract class MixinAbstractButtonWidget extends DrawableHelper implement
             ((TextFieldWidgetInvoker) this).updateWidgetStatus();
         } else if (this.getClass().getName().toLowerCase().contains("text")) {
             ImBlocker.LOGGER.debug("AbstractButtonWidget.changeFocus");
-            WidgetManager.updateWidgetStatus("ClickableWidget", this.isFocused());
+            WidgetManager.updateWidgetStatus("TextFieldWidget", this.isFocused());
         }
     }
 }

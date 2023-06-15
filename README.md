@@ -11,12 +11,13 @@ This mod fixes the typing bug that exists in Minecraft which annoyed foreign pla
 ### Tested on these versions
 *but only with mod FabricAPI and IMBlockerFabric*
 
-MC 1.19.3,
+MC 1.20.1,
+MC 1.19.4,
 MC 1.18.2,
 MC 1.17.1,
 MC 1.16.5,
 MC 1.15.2,
-MC 1.14.4,
+MC 1.14.4
 
 ## Star History
 

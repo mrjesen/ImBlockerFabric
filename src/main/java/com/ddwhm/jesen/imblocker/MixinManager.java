@@ -112,6 +112,10 @@ public class MixinManager implements IMixinConfigPlugin {
             return false;
         }
 
+        if (mixinClassName.endsWith("mixin.MixinMinecraftClientBefore16") && isSatisfied(">=","1.16")) {
+            return false;
+        }
+
         if (mixinClassName.endsWith("mixin.MixinAbstractButtonWidgetLegacy") && (isSatisfied("<","1.16") || isSatisfied(">=", "1.19.4"))) {
             return false;
         }
