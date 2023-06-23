@@ -3,21 +3,21 @@ package com.ddwhm.jesen.imblocker.mixin;
 import com.ddwhm.jesen.imblocker.ImBlocker;
 import com.ddwhm.jesen.imblocker.util.TextFieldWidgetInvoker;
 import com.ddwhm.jesen.imblocker.util.WidgetManager;
-import net.minecraft.client.gui.Drawable;
-import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.navigation.GuiNavigation;
 import net.minecraft.client.gui.navigation.GuiNavigationPath;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ClickableWidget.class)
-public abstract class MixinAbstractButtonWidget extends DrawableHelper implements Drawable, Element {
+public abstract class MixinAbstractButtonWidget{
 
+    @Shadow
+    private boolean focused;
     // Fuck remap
     @Inject(method = {"setFocused", "method_25365"}, at = @At("RETURN"))
     private void postSetFocused(boolean selected, CallbackInfo info) {
@@ -49,7 +49,7 @@ public abstract class MixinAbstractButtonWidget extends DrawableHelper implement
             ((TextFieldWidgetInvoker) this).updateWidgetStatus();
         } else if (this.getClass().getName().toLowerCase().contains("text")) {
             ImBlocker.LOGGER.debug("AbstractButtonWidget.changeFocus");
-            WidgetManager.updateWidgetStatus("TextFieldWidget", this.isFocused());
+            WidgetManager.updateWidgetStatus("TextFieldWidget", this.focused);
         }
     }
 }

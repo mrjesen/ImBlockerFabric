@@ -65,6 +65,13 @@ public class ImBlocker implements ClientModInitializer {
                 }
             }
         });
+
+        ScreenEvents.AFTER_INIT.register((client, screen, scaledWidth, scaledHeight)->{
+//            ScreenEvents.beforeRender(screen).register((s,m,x,y,t)->{
+//
+//            });
+
+        });
     }
 
 }
